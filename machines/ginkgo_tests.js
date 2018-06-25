@@ -96,15 +96,8 @@ function stateHeader(memory) {
                 return rule.oneOf(
                     rule.pattern(/^  (.*)$/, (ctx) => {
                         let fileLine = ctx.match[1];
-                        return rule.oneOf(
-                            rule.pattern(/^$/, (ctx) => {
-                                memory.headers[new Header(first, second, fileLine)] = begin;
-                                return stateMain(memory);
-                            }),
-                            (ctx) => {
-                                return stateMain(memory)(ctx);
-                            },
-                        );
+                        memory.headers[new Header(first, second, fileLine)] = begin;
+                        return stateMain(memory);
                     }),
                     (ctx) => {
                         return stateMain(memory)(ctx);
