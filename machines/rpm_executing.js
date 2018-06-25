@@ -23,6 +23,20 @@ function init() {
                         return init()(ctx);
                     };
                 }),
+                rule.pattern(/^error: Bad exit status from /, (ctx) => {
+                    return (ctx) => {
+                        ctx.emit({
+                            offset: begin,
+                            length: ctx.offset - begin,
+                            metadata: {
+                                type: "rpm_executing",
+                                name: name,
+                                status: "failure",
+                            },
+                        });
+                        return init()(ctx);
+                    };
+                }),
                 rule.eof((ctx) => {
                     ctx.emit({
                         offset: begin,
