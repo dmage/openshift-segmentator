@@ -5,7 +5,7 @@ const rule = require("digdown/rule");
 function init() {
     return rule.blocks(
         rule.pattern(/^\++ /, (ctx) => {
-            if (ctx.line.startsWith("++ Building")) {
+            if (/^\+\+ [A-Z][a-z]+ /.test(ctx.line)) {
                 return;
             }
             return {
