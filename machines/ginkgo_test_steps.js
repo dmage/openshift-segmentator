@@ -7,13 +7,9 @@ function init() {
         rule.pattern(
             /^(?:[A-Z][a-z][a-z] [ 0-9][0-9] [0-9][0-9]:[0-9][0-9]:[0-9][0-9]\.[0-9][0-9][0-9]: INFO:|STEP: )/,
             (ctx) => {
-                let name = ctx.line;
-                if (ctx.line.length > 255) {
-                    name = ctx.line.slice(0, 255-3) + "...";
-                }
                 return {
                     begin: ctx.offset,
-                    name: name,
+                    name: rule.truncateName(ctx.line),
                 };
             },
         ),

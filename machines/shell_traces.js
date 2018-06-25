@@ -10,7 +10,7 @@ function init() {
             }
             return {
                 begin: ctx.offset,
-                name: ctx.line,
+                name: rule.truncateName(ctx.line),
             };
         }),
         (ctx, state) => state,

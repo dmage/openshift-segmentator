@@ -75,7 +75,13 @@ function dropSmallSegments(minSize, seg) {
                 ),
                 "make_dir": segmentator.basic(
                     require("./machines/make_dir")
-                )
+                ),
+                "hack_build_images": segmentator.basic(
+                    require("./machines/square_brackets")
+                ),
+                "hack_build_base_images": segmentator.basic(
+                    require("./machines/square_brackets")
+                ),
             })
         )
     );
