@@ -19,8 +19,14 @@ function main() {
                 (ctx) => {
                     if (state.lines === 0) {
                         state.name = ctx.line;
+                        if (state.name.length > 255) {
+                            state.name = state.name.slice(0, 255-3) + "...";
+                        }
                     }
                     state.lines++;
+                    if (/^make(\[[0-9]+\])?: \*\*\* \[.*\] Error [1-9][0-9]*$/.test(ctx.line)) {
+                        state.status = "failure";
+                    }
                 },
                 rule.pattern(state.end, (ctx) => {
                     return (ctx) => {
