@@ -28,11 +28,12 @@ function dropSmallSegments(minSize, seg) {
         require("./machines/rpm_executing"),
         require("./machines/make_dir"),
         require("./machines/shell_traces"),
+        require("./machines/in_suites"),
     ];
     const segtor = segmentator.collapseSuccessfulSiblings(
         10,
         segmentator.filter(
-            (x) => x.metadata.type !== "shell_trace" || x.length >= 4096,
+            (x) => x.metadata.type !== "shell_trace" && x.metadata.type !== "in_suite" || x.length >= 4096,
             segmentator.byType({
                 "toplevel": segmentator.basic(
                     require("./machines/stages"),
@@ -81,6 +82,9 @@ function dropSmallSegments(minSize, seg) {
                 ),
                 "hack_build_base_images": segmentator.basic(
                     require("./machines/square_brackets")
+                ),
+                "in_suite": segmentator.basic(
+                    require("./machines/go_diff_a_b")
                 ),
             })
         )
