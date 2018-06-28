@@ -36,6 +36,9 @@ function main() {
             ctx.started = true;
             ctx.begin = ctx.offset;
             ctx.name = ctx.line;
+            if (ctx.line.startsWith("• Failure") || ctx.line.startsWith("•! Panic") || ctx.line.startsWith("•... Timeout")) {
+                ctx.status = "failure";
+            }
         }),
         rule.eof((ctx) => {
             if (ctx.started) {
