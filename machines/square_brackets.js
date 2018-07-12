@@ -17,7 +17,6 @@ function init() {
                         n++;
                     } else {
                         if (n >= 4) {
-                            console.error(n, prefix, ctx.line);
                             ctx.emit({
                                 offset: begin,
                                 length: ctx.offset - begin,

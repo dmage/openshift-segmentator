@@ -29,6 +29,7 @@ function dropSmallSegments(minSize, seg) {
         require("./machines/make_dir"),
         require("./machines/shell_traces"),
         require("./machines/in_suites"),
+        require("./machines/go_test_stderr"),
     ];
     const segtor = segmentator.collapseSuccessfulSiblings(
         10,

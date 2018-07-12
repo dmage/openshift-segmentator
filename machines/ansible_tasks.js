@@ -47,6 +47,10 @@ function inside(seg) {
         rule.pattern(/^$/, (ctx) => {
             return end(seg);
         }),
+        rule.pattern(/^[0-9][0-9][0-9][0-9]\/[0-9][0-9]\/[0-9][0-9] /, (ctx) => {
+            // start of the prow output
+            return end(seg)(ctx);
+        }),
         rule.pattern(/^(ok|changed|skipping|failed|fatal): \[([A-Za-z0-9. >-]+)\].* => {$/, (ctx) => {
             seg.metadata.status = merge_status(seg.metadata.status, result_to_status(ctx.match[1]));
             return rule.oneOf(
